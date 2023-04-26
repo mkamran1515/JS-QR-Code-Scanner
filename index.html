@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - QR Code</title>
+    <!-- link css file  -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <p>Enter Text or Link: </p> 
+        <input type="text" required class="borderInput" placeholder="Enter Text or URL" id="inputVal" />
+        <div id="imgBox">
+            <img src="" id="imgQR" />
+        </div>
+        <button onclick="generateCode()">Generate QR Code</button>
+    </div>
+<!-- javascript code  -->
+<script>
+    let inputVal = document.getElementById("inputVal");
+    let imgBox = document.getElementById("imgBox");
+    let imgQR = document.getElementById("imgQR");
+    let generateCode = () => {
+        if(inputVal.value.length > 0) {
+            imgQR.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+ inputVal.value;
+            imgBox.classList.add("show-img");
+        } else {
+            inputVal.classList.remove("borderInput");
+            inputVal.classList.add("error");
+            setTimeout( () => {
+                inputVal.classList.remove("error");
+                inputVal.classList.add("borderInput");
+            }, 1000);
+        }
+    }
+</script>
+</body>
+</html>
